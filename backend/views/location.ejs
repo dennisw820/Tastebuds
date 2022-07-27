@@ -1,0 +1,30 @@
+<%- include('partials/navbar.ejs')%>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css' rel='stylesheet'/>
+    <!--Location Beginning-->
+    <div id="location" class="container-fluid p-5">
+        <h1 id="" class="text-success">Location</h1>
+        <p id="" class="text-center text-primary"> We are located on the corner of SW 151 St & Broadway Blvd</p>
+        <div class="container-fluid">
+
+            <div id="map" style="width: 950px; height: 620px;" class=""></div>
+            <div id="geocoder" class="geocoder"></div>
+    
+        </div>        
+    </div>
+    <!--Location Ending-->
+    <script defer type="text/javascript" src="./private/Javascript/location.js"></script>
+    <script defer type="text/javascript" src="./public/map.js"></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js'></script>
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoiZGV2LXJwaSIsImEiOiJja2M0d2dsM24wYnZmMnFwajMxdDRmbnZ0In0.3ETfqbTn02vyIX3SNR_fNQ';
+        // TO MAKE THE MAP APPEAR YOU MUST
+                // ADD YOUR ACCESS TOKEN FROM
+                // https://account.mapbox.com
+        const map = new mapboxgl.Map({
+            container: 'map', // container ID
+            style: 'mapbox://styles/mapbox/streets-v11', // style URL
+            center: [-74.5, 40], // starting position [lng, lat]
+            zoom: 9 // starting zoom
+        });
+    </script>
+    <%- include('partials/footer.ejs')%>

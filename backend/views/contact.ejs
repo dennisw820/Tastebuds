@@ -1,0 +1,56 @@
+<%- include ('partials/navbar.ejs') %> 
+<!-- Add gradient background -->
+    <div id="contact-bg" class="container-fluid p-5">
+        <!-- Change background to #ffffff -->
+        <div class="row mb-3 text-center">
+            <h1 class="">Peak Development Contact</h1>
+            <p class="fs-5">We'd love to help you make your dreams come true. Let's talk solutions.</p>
+        </div>
+        <div id="contact-box" class="row p-4 bg-light rounded shadow">
+            
+                <form action="/contact" method="POST" class="input-group-lg">
+                    <div class="row">
+                        <div class="col">
+                            <label for="" class="mb-2 float-start">First Name</label>
+                            <br>
+                            <input name="firstName" type="text" class="form-control-lg mb-3 w-100" placeholder="John" required>
+                        </div>
+                        <div class="col">
+                            <label for="" class="mb-2 float-start">Last Name</label>
+                            <br>
+                            <input name="lastName" type="text" class="form-control-lg mb-3 w-100" placeholder="Doe" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="" class="mb-2 float-start">Phone Number</label>
+                            <br>
+                            <input name="phone" type="tel" class="form-control-lg mb-3 w-100" placeholder="1234567890" required>
+                        </div>
+                        <div class="col">
+                            <label for="" class="mb-2 float-start">Email</label>
+                            <br>
+                            <input name="email" type="email" class="form-control-lg mb-3 w-100" placeholder="example@mail.com" required>
+                        </div>                
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="" class="mb-2 float-start">Subject</label>
+                            <br>
+                            <input name="subject" type="text" class="form-control-lg mb-4 w-100" placeholder="Subject" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- Set box resize to none -->
+                        <div class="col">
+                            <textarea name="message" id="" class="mb-3 p-3 w-100" cols="30" rows="10" placeholder="Message goes here..." required></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <button class="btn btn-block btn-dark p-4" type="submit">Contact Us</button>
+                    </div>
+                </form>
+
+        </div>
+    </div>
+<%- include ('partials/footer.ejs') %> 

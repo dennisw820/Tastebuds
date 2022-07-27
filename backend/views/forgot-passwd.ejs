@@ -1,0 +1,24 @@
+<%- include('partials/noAccessNavbar.ejs')%>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-9 text-center p-5 shadow p-3 mb-5 bg-body rounded-3 position-absolute top-50 start-50 translate-middle">
+                    <div id="login" class="text-center">
+                        <div class="col-sm-12 text-center">
+                            <h1 class="text-success text-center">Forgot Password</h1>
+                            <p class="m-4">Need to reset your password? No problem! Enter the email address that you used to register then click the button below. We'll send you an email with your username and a link to reset your password.</p>
+                        </div>
+                        <form class="form-signin" action="/forgot-passwd" method="POST" autocomplete="on" autocapitalize="on">
+                            <div class="input-group">
+                                <i id="user" class="fa fa-user input-group-text"></i>
+                                <input class="form-control rounded" name="username" type="text" placeholder="Username or Email..." title="Please enter a valid Username or Email." required>
+                            </div>
+                            <button id="signin" class="btn btn-success mt-3 rounded" type="submit">Submit Username</button>
+                        </form>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<%- include('partials/footer.ejs')%>

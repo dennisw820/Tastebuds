@@ -1,0 +1,41 @@
+<%- include('partials/navbar.ejs')%>
+
+        <!--Menu Beginning-->
+        <div class="container m-auto">
+            <!-- Searchbar -->
+            <div class="search-bar m-4 col-sm-12 text-center">
+                <h1 id="menu-heading" class="text-center text-success m-4 mt-5">Menu</h1>
+                <form class="input-group" action="/food-menu" method="POST">
+                    <input id="menu-input" class="form-control w-50" type="search" name="searchBar" id="" placeholder="Search for food..." required>
+                    <select name="filter" id="" class="form-select w-25">
+                        <option value="Filter" selected>Filter</option>
+                        <option value="Vegan">Vegan</option>
+                        <option value="Salads">Salads</option>
+                        <option value="Bowls">Bowls</option>
+                    </select>
+                    <button id="menu-search" class="form-control btn-primary text-center w-25" type="submit">Search</button>
+                </form>
+            </div>
+            <!-- Menu Items -->
+            <div class="d-flex g-3 p-5 col-sm-12">
+                <%- include('partials/food.ejs')%>
+            </div>
+            <br>
+            <br>
+            <%- include('partials/pagination.ejs')%>
+            </div>
+        </div>
+        <!--Menu Ending-->
+
+    <script defer type="text/javascript" src="./public/Javascript/location.js"></script>
+
+<%- include('partials/footer.ejs')%>
+
+
+<!--*  Render food items in grid array (3-4 per row)
+    *  Design filter option buttons
+    *  Setup pagination
+    *  Change card size
+    *  Create template for each food item
+    *  Configure button to add food item to cart
+-->

@@ -1,0 +1,45 @@
+<%- include('partials/noAccessNavbar.ejs')%>
+
+        <section class="container-fluid">
+            <div class="row">
+                <div class="col-sm-9 text-center p-5 shadow p-3 mb-5 bg-body rounded-3 position-absolute top-50 start-50 translate-middle">
+                    <!-- <div id="login"> -->
+                        <div class="mb-5">
+                            <h1 class="text-success text-center">Tastebuds Signup</h1>
+                            <p class="text-center">Fill out the registration form to create an account.</p>
+                        </div>
+                        <form class="form-signin" action="/signup" method="POST" autocomplete="on" autocapitalize="on">
+                            <div class="input-group mb-3">
+                                <i id="user" class="fa fa-user input-group-text"></i>
+                                <input class="form-control rounded" name="userName" type="text" placeholder="Username..." title="Please enter a valid Username." required>
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <i id="user" class="fa fa-user input-group-text"></i>
+                                <input class="form-control rounded" name="email" type="text" placeholder="Email..." title="Please enter a valid Email." required>
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <i id="lock" class="fa fa-lock input-group-text"></i>
+                                <input class="form-control rounded" name="password" type="password" placeholder="Password..." title="Please enter a valid password." required>
+                            </div>
+
+                            <div class="input-group mb-4">
+                                <i id="lock" class="fa fa-lock input-group-text"></i>
+                                <input class="form-control rounded" name="password2" type="password" placeholder="Confirm password..." title="Please enter a valid password." required>
+                            </div>
+
+                            <div class="float-left">
+                                <input name="acknw" type="checkbox" class=""> 
+                                <label for="" class="form-check-label px-3 mb-3">I have read and agree to the <a class="text-success" href="">Terms of Use</a> and <a class="text-success" href="">Privacy Policy</a>.</label>
+                            </div>
+                            <br>
+                            <button id="signin" class="btn btn-success btn-block text-center rounded" type="submit">Create Account</button>
+                            <br>
+                        </form>
+                    <!-- </div> -->
+                </div>
+            </div>
+        </section>
+
+<%- include('partials/footer.ejs')%>

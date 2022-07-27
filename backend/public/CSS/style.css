@@ -1,0 +1,138 @@
+body {
+    font-family: 'Poppins', sans-serif;
+}
+/* html {
+    height: 100%;
+}
+body {
+    height: 60%;
+}
+nav {
+    overflow: hidden;
+    position: fixed;
+}
+nav .nav-item .nav-link :hover {
+    color: #28a745;
+}
+#logo {
+    color: #28a745;
+    font-size: large;
+    float: left;
+}
+
+.icons:hover {
+    color: #28a745;
+    font-size: 25px;
+    float: right;
+    padding: 0 15px;
+/* } */
+#hero {
+    height: 90vh;
+    background: url('https://images.pexels.com/photos/6267/menu-restaurant-vintage-table.jpg?cs=srgb&dl=chairs-menu-restaurant-6267.jpg&fm=jpg height="50%" width="50%"');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment:fixed;
+}
+#hero-text {
+    font-family: 'Poppins', sans-serif !important;
+}
+/* #hero-btn { 
+    width: 10%;
+    margin-top: 0.5%;
+}
+#hero-header {
+    border: 1px green solid;
+    padding: 25px;
+}
+#about {
+    background-color: #e2e0e0;
+    padding: 7%;
+    padding-top: 7%;
+    font-size: 180%;
+}
+#about-text {
+    padding-top: 7%;
+}
+#about-us {
+    height: 100%;
+    width: 100%;
+    float: right;
+    padding-top: 7%;
+}
+#menu {
+    padding: 7%;
+    margin: 0;
+}
+#menu-heading {
+    padding-bottom: 5%;
+}
+.menu-btn {
+    width: 50%;
+}
+.img {
+    border-radius: 50%;
+    padding-top: 2%;
+    padding-bottom: 3%; 
+}
+#location {
+    padding: 7%;
+    margin: 0;
+    background-color: #e2e0e0;
+}
+#location-img {
+    height: 100%;
+    width: 100%;
+}
+#contact {
+    margin: 0;
+    padding: 7%;
+}
+#contact-sub, #contact-msg, #contact-btn {
+    width: 60.5%;
+}
+#contact-msg {
+    resize: none;
+}
+#footer {
+    color: green;
+    margin: 0;
+    height: 10vh;
+}
+#info {
+    padding-left: 5%;
+    padding-top: 3%;
+}
+.helpful-links {
+    display: block;
+    color: green;
+}
+.form-control-sm, .form-control {
+    width: 30%;
+    outline: none;
+    display: inline-block;
+    margin-bottom: 15px;
+} */
+#menu-input {
+    max-width: 75%;
+}
+#menu-search {
+    max-width: 25%;
+}
+textarea {
+    resize: none;
+}
+#map {
+    
+}
+#geocoder {
+
+}
+#location-bg {
+    width: 100vw;
+    background-image: url('https://images.pexels.com/photos/4551619/pexels-photo-4551619.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260');
+    background-repeat: no-repeat;
+}
+.profile-list {
+    list-style: none;
+}

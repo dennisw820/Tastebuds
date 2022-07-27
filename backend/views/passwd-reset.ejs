@@ -1,0 +1,37 @@
+<%- include('partials/noAccessNavbar.ejs')%>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-9 text-center p-5 shadow p-3 mb-5 bg-body rounded-3 position-absolute top-50 start-50 translate-middle">
+                    <div id="login" class="text-center">
+                        <div class="col-sm-12 text-center mb-4">
+                            <h1 class="text-success text-center">Password Reset</h1>
+                            <p class="">Enter a new password in the corresponding field.</p>
+                            <ul class="m-4">
+                                <h5 class="">Characteristics of strong passwords</h5>
+                                <li class="">At least 8 characters—the more characters, the better</li>
+                                <li class="">A mixture of both uppercase and lowercase letters</li>
+                                <li class="">A mixture of letters and numbers</li>
+                                <li class="">Inclusion of at least one special character, e.g., ! @ # ? ]</li>
+                            </ul>
+                        </div>
+                        <form class="form-signin" action="/forgot-passwd" method="POST" autocomplete="on" autocapitalize="on">
+                            <div class="input-group mb-4">
+                                <i id="user" class="fa fa-user input-group-text"></i>
+                                <input class="form-control" name="passwd1" type="password" placeholder="New Password..." title="Please enter a valid Username or Email." required>
+                            </div>
+
+                            <div class="input-group">
+                                <i id="user" class="fa fa-user input-group-text"></i>
+                                <input class="form-control" name="passwd2" type="password" placeholder="Confirm Password..." title="Please enter a valid Username or Email." required>
+                            </div>
+                            
+
+                            <button id="signin" class="btn btn-success text-center mt-4 rounded" type="submit">Update Password</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<%- include('partials/footer.ejs')%>
