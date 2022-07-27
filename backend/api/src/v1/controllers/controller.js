@@ -186,16 +186,58 @@ exports.deleteItem = async (req, res, id, err, next) => {
 
     // Signin
     exports.signIn = async (req, res,err, id, next) => {
+        // Get, Validate & Sanitize  Data
+        let {userName, password} = req.body;
 
+        // Check for User
+        let query = `SELECT ${/*USERNAME & PASSWORD*/} FROM ${/*USER TABLE*/} WHERE ${/*USERNAME & PASSWORD*/} = ${/*USERNAME & PASSWORD*/}`;
+        try {
+            await db.query(query)
+            if(results.length > 0) {
+                res.status(200).json({
+                    "status": "OK",
+                    "message": "Login successful."
+                })
+                res.render('../../../../../frontend/views/welcome.ejs')
+            }
+        }
+        catch(err) {
+            res.status(400).json({
+                "status": "Failed",
+                "message": err
+            })
+        }
+
+        db.destroy();
+        next();
     }
     
     // Signup
     exports.signUp = async (req, res,err, id, next) => {
+        // Get & Validate Data
         var userName = req.body.userName;
         var email = req.body.email;
         var password = req.body.password;
         var password2 = req.body.password2;
         var ackw = req.body.ackw;
+        try{
+            if(
+                !userName ||
+                !email ||
+                !password ||
+                password != password2)
+            // Salt Password
+
+            // Store in DB
+            let query = `INSERT INTO ${/*table name*/} VALUES(${userName}, ${email}, ${password})`;
+            db.query(query)
+            // Verify Submission & Send Confirmation & Redirect
+            res.status(200).json({})
+            res.redirect('/')
+        }
+        catch(err) {
+            res.status(400).json({})
+        }
     }
 
     // Edit Profile
