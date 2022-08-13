@@ -66,10 +66,10 @@ router.route('/food-menu')
 
 // Checkout ***
 router.route('/checkout')
-    .get('/checkout', function(req,res){
+    .get(function(req,res){
         res.render('checkout.ejs');
     })
-    .post('/order');
+    .post('/checkout');
 
 // Cart 
 router.route('/cart')
@@ -99,10 +99,10 @@ router.route('/testimonials')
     .get((req, res) => {
         res.render('reviews.ejs');
     })
-    
+    .post();
 
 // Add Review
-app.route('/review')
+router.route('/review')
     .get((req, res) => {
         res.render('addReview.ejs');
     })
