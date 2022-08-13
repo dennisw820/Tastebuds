@@ -27,6 +27,7 @@ app.set('view engine', 'ejs');
     // require static for static routes
     app.use(express.static(__dirname));
     app.use(express.static('private'));
+    app.use("/", router);
     
     
 app.listen(process.env.PORT, () => {
