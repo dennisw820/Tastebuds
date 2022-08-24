@@ -1,7 +1,7 @@
 // Resources
 const express = require('express');
 const router = express.Router();
-const menuController = require('../controllers/controller');
+const controller = require('../controllers/controller.js');
 
 // Landing Route
 router.route('/')
@@ -69,7 +69,7 @@ router.route('/checkout')
     .get(function(req,res){
         res.render('checkout.ejs');
     })
-    .post('/checkout');
+    // .post('/checkout', controller.processPayment);
 
 // Cart 
 router.route('/cart')

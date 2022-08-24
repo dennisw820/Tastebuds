@@ -1,5 +1,5 @@
 // Resources
-const itemSchema = require('.././models/model.js');
+// const itemSchema = require('.././models/model.js');
 const db = require('../../../../.config/mysql.js');
 const json = require('json');
 
@@ -11,7 +11,7 @@ exports.getItems = async (req, res, err, results, next) => {
     try {
         // const items = await item.find(); *MongoDB
         // Write & Execute Query
-        var query = `SELECT * FROM ${/*db.table*/};`;
+        var query = `SELECT * FROM ${/*db.table*/ db};`;
         var items = await db.query(query);
         res.status(200).json({
             status: 'success',
@@ -35,7 +35,7 @@ exports.getItem = async (req, res, results, err, next) => {
         // Get ID
         var id = req.params.id;
         // const item = await item.findById(req.param.id); *MongoDB
-        var query = `SELECT * FROM ${/*db.table*/} WHERE id = id;`;
+        var query = `SELECT * FROM ${/*db.table*/ db} WHERE id = id;`;
         var item = await db.query(query);
         res.status(200).json({
             status: 'success',
@@ -89,12 +89,12 @@ exports.updateItem = async (req, res, id, err, results, fields, next) => {
         // const overwrittenItem = await item.put(req.body); *MongoDB
 
         var id = req.params.id;
-        let query = `UPDATE ${/*db.table*/} SET ? = ?;`;
+        let query = `UPDATE ${/*db.table*/db} SET ? = ?;`;
 
 
         // Write Query & Execute
         // ***Avoid including sensitive info in query
-        var updatedItem = await db.query(query,[${/*db.column.toupdate*/}, ${/*appdata.value*/}], (err, results, fields) =>{
+        var updatedItem = await db.query(query,[`${/*db.column.toupdate*/db}, ${/*appdata.value*/db}`], (err, results, fields) =>{
             if(err) {
                 res.status(400).json({error: 'There was an error fetching your request.'});
                 console.log(err);
@@ -104,8 +104,13 @@ exports.updateItem = async (req, res, id, err, results, fields, next) => {
                     status: "OK",
                     data:overwrittenItem
                 });
-                console.log(${results});
-}
+                console.log(`${results}`);
+            }
+        });
+    } catch(err) {
+
+    }
+}   
 
 // Post Request
 exports.createItem = async (req, res, err, next) => {
@@ -131,8 +136,8 @@ exports.createItem = async (req, res, err, next) => {
     try {
         // Write Query & Execute
             // ***Avoid including sensitive info in query
-        let query = `INSERT INTO TABLE ${/*db.table*/} (${/*db.columns*/}) VALUES(?,?,?,?);`;
-        var createdItem = await db.query(query, [newItem.title, neItemt.duration, newItem.description], (err, results, fields) => {
+        let query = `INSERT INTO TABLE ${/*db.table*/db} (${/*db.columns*/db}) VALUES(?,?,?,?);`;
+        var createdItem = await db.query(query, [newItem.title, newItem.duration, newItem.description], (err, results, fields) => {
             if(err) {
                 res.status(400).json({error: 'There was an error submitting your request.'});
                 console.log(err);
@@ -145,7 +150,7 @@ exports.createItem = async (req, res, err, next) => {
                 });
                 console.log(`Record added successfully.`)
             }
-        }
+        });
     }
     catch (err) {
         res.status(400).json({
@@ -163,23 +168,27 @@ exports.deleteItem = async (req, res, id, err, next) => {
         // const deletedItem = await item.findByIdAndDelete(req.params.id); *MongoDB
 
         // Get Param ID
-    let id = req.params.id;
+        let id = req.params.id;
 
-    // Write Query & Execute
-    // ***Avoid including sensitive info in query
-    let query = `DELETE FROM ${/*db.table*/} WHERE ${/*table.id*/} = ?;`;
-        var deletedRecord = await db.query(query,[${id}], (err, results, fields) =>{
-            if(err) {
-                res.status(400).json({error: 'There was an error fetching your request. Please try again.'});
-                console.log(err);
-            }
-            else {
-                res.status(200).json({
-                    status: "OK",
-                    "message": "Record deleted.",
-                });
-                console.log(${results});
-
+        // Write Query & Execute
+        // ***Avoid including sensitive info in query
+        let query = `DELETE FROM ${/*db.table*/db} WHERE ${/*table.id*/db} = ?;`;
+            var deletedRecord = await db.query(query,[`${id}`], (err, results, fields) =>{
+                if(err) {
+                    res.status(400).json({error: 'There was an error fetching your request. Please try again.'});
+                    console.log(err);
+                }
+                else {
+                    res.status(200).json({
+                        status: "OK",
+                        "message": "Record deleted.",
+                    });
+                    console.log(`${results}`);
+                }
+            });
+    }catch(err) {
+            
+    }
     db.destroy();
     next();
 }
@@ -190,7 +199,7 @@ exports.deleteItem = async (req, res, id, err, next) => {
         let {userName, password} = req.body;
 
         // Check for User
-        let query = `SELECT ${/*USERNAME & PASSWORD*/} FROM ${/*USER TABLE*/} WHERE ${/*USERNAME & PASSWORD*/} = ${/*USERNAME & PASSWORD*/}`;
+        let query = `SELECT ${/*USERNAME & PASSWORD*/db} FROM ${/*USER TABLE*/db} WHERE ${/*USERNAME & PASSWORD*/db} = ${/*USERNAME & PASSWORD*/db}`;
         try {
             await db.query(query)
             if(results.length > 0) {
@@ -229,7 +238,7 @@ exports.deleteItem = async (req, res, id, err, next) => {
             // Salt Password
 
             // Store in DB
-            let query = `INSERT INTO ${/*table name*/} VALUES(${userName}, ${email}, ${password})`;
+            var query = `INSERT INTO ${/*table name*/db} VALUES(${userName}, ${email}, ${password})`;
             db.query(query)
             // Verify Submission & Send Confirmation & Redirect
             res.status(200).json({})

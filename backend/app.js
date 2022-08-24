@@ -1,6 +1,6 @@
 // Dependencies 
 const express = require('express');
-const router = require('./api/routes/router.js');
+const router = require('./api/src/v1/routes/router.js');
 // const mongodb = require('./.config/mongodb');
 const passport = require('./.config/passport.js');
 const mysql = require('mysql');

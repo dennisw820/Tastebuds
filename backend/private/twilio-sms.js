@@ -3,7 +3,7 @@ const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);
 
 var message = 'Please send me a snack *wink*';
-var recipient = '9546385037';
+var recipient = '';
 
 client.messages.create({
     body: message,
