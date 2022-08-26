@@ -6,7 +6,7 @@ const controller = require('../controllers/controller.js');
 // Landing Route
 router.route('/')
     .get(function(req, res){
-        res.render('index.ejs');
+        res.render('../../../../.././frontend/views/index.ejs');
     })
     .post();
 

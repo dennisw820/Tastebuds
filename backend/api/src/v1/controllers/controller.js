@@ -1,6 +1,9 @@
 // Resources
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 // const itemSchema = require('.././models/model.js');
 const db = require('../../../../.config/mysql.js');
+const validate = require('./validate.js');
 const json = require('json');
 
 // Route Handlers
@@ -194,9 +197,15 @@ exports.deleteItem = async (req, res, id, err, next) => {
 }
 
     // Signin
-    exports.signIn = async (req, res,err, id, next) => {
+    exports.signIn = async (req, res, err, id, next) => {
         // Get, Validate & Sanitize  Data
         let {userName, password} = req.body;
+        if(!userName && password) {
+            res.status(400).json({
+                status: "Failed",
+                message: "Fields cannot be empty. Please fill out fields and try again."
+            });
+        }
 
         // Check for User
         let query = `SELECT ${/*USERNAME & PASSWORD*/db} FROM ${/*USER TABLE*/db} WHERE ${/*USERNAME & PASSWORD*/db} = ${/*USERNAME & PASSWORD*/db}`;
@@ -222,7 +231,7 @@ exports.deleteItem = async (req, res, id, err, next) => {
     }
     
     // Signup
-    exports.signUp = async (req, res,err, id, next) => {
+    exports.signUp = async (req, res, err, id, token, next) => {
         // Get & Validate Data
         var userName = req.body.userName;
         var email = req.body.email;
@@ -230,19 +239,32 @@ exports.deleteItem = async (req, res, id, err, next) => {
         var password2 = req.body.password2;
         var ackw = req.body.ackw;
         try{
+            // TODO: Check if: fields are empty, password contains 8 characters 1 capital letter and special character, if user already exist w/ validate.js  
             if(
                 !userName ||
                 !email ||
                 !password ||
-                password != password2)
+                password != password2) {
+                    res.status(400).json({
+                        status: "Failed",
+                        message: "Fields cannot be empty. Please fill out fields and try again."
+                    })
+                }
+            // Create Token
+            const token = jwt.sign(
+                // TODO: Get user ID from DB
+                {user_id: user_id, userName}, 
+                process.env.TOKEN_KEY,
+                {expiresIn: "5h"}
+            )
+
             // Salt Password
 
             // Store in DB
             var query = `INSERT INTO ${/*table name*/db} VALUES(${userName}, ${email}, ${password})`;
             db.query(query)
             // Verify Submission & Send Confirmation & Redirect
-            res.status(200).json({})
-            res.redirect('/')
+            res.status(200).json({}).then(res.redirect('/login'))
         }
         catch(err) {
             res.status(400).json({})
