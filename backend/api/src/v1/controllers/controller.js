@@ -6,6 +6,8 @@ const db = require('../../../../.config/mysql.js');
 const validate = require('./validate.js');
 const json = require('json');
 
+// Error Handler
+
 // Route Handlers
 
     // Menu
