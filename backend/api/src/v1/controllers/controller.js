@@ -4,12 +4,22 @@ const jwt = require('jsonwebtoken');
 // const itemSchema = require('.././models/model.js');
 const db = require('../../../../.config/mysql.js');
 const validate = require('./validate.js');
+const authController = require('./authController.js');
 const json = require('json');
 
 // Error Handler
 
 // Route Handlers
 
+// Get Request: Home
+exports.getHome = (req, res, next) => {
+    try {
+        // res.render('../../../../.././frontend/views/index.ejs');
+        res.render('C:\\Users\\DevLab\\Desktop\\.Projects\\Tastebuds\\frontend\\views\\index.ejs')
+    }
+    catch (err) {console.log(err);}
+    next();
+}
     // Menu
 // Get Request: All
 exports.getItems = async (req, res, err, results, next) => {

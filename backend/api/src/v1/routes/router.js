@@ -2,12 +2,11 @@
 const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/controller.js');
+const authController = require('../controllers/authController.js');
 
 // Landing Route
 router.route('/')
-    .get(function(req, res){
-        res.render('../../../../.././frontend/views/index.ejs');
-    })
+    .get(authController.protect, controller.getHome)
     .post();
 
 // Signin Route
