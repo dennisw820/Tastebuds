@@ -4,6 +4,7 @@ const router = require('./api/src/v1/routes/router.js');
 // const mongodb = require('./.config/mongodb');
 const passport = require('./.config/passport.js');
 const mysql = require('mysql');
+const bcrypt = require('bcryptjs');
 var cookieSession = require('cookie-session');
 const cors = require('cors');
 const bodyParser = require('body-parser');
