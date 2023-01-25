@@ -1,19 +1,20 @@
 // Resources
-// const db = require(__dirname + '/backend/.config/mysql.js');
+const db = require(__dirname + '/backend/.config/mysql.js');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const { promisify } = require('util');
 const { authController } = require('passport');
 
 // Middleware
 // db.connect();
-
-exports.protect = (async (req, res, next, token) => {
+const decoded;
+exports.protect = (async (req, res, next, token, decoded, promisify) => {
     // 1. Check Esistence & Get Token
     // console.log(req.headers)
     // let token;
     try {
         if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
-           const token = req.headers.authorization.split(' ')[1];
+            const token = req.headers.authorization.split(' ')[1];
         }
         console.log(token)
         if (!token) {
@@ -21,7 +22,8 @@ exports.protect = (async (req, res, next, token) => {
         }
     }
     // 2. Token Verification
-    
+    decoded = await promisify(jwt.verify)(token, process.env.TOKEN_KEY)
+    console.log(decoded);
     // 3. Check if User Still Exist
 
     // 4. Check if User Changed Password After JWT Issued
