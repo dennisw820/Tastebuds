@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 // const itemSchema = require('.././models/model.js');
 // const db = require('../../../../.config/mysql.js');
+const router = require("../routes/router.js");
 const validate = require('./validate.js');
 const authController = require('./authController.js');
 const json = require('json');

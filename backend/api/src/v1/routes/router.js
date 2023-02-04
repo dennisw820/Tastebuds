@@ -11,10 +11,8 @@ router.route('/')
 
 // Signin Route
 router.route('/signin')
-    .get(function(req,res){
-        res.render('signin.ejs');
-    })
-    .post();
+    .get(controller.getHome)
+    .post(controller.signIn);
 
 // Home Route
 router.route('/welcome')
@@ -24,10 +22,10 @@ router.route('/welcome')
 
 // Signup Route ***
 router.route('/signup')
-    .get(function(req,res){
+    .get((req,res) => {
         res.render('signup.ejs');
     })
-    .post();
+    .post(controller.signUp);
 
 // Password Reset
 router.route('/password-reset')
