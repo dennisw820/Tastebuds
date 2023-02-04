@@ -1,6 +1,6 @@
 // Resources
 const db = require('../../../../.config/mysql.js');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 // Error Handler
 exports.errorHandler = (error, next) => {

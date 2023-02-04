@@ -1,8 +1,8 @@
 // Resources
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 // const itemSchema = require('.././models/model.js');
-const db = require('../../../../.config/mysql.js');
+// const db = require('../../../../.config/mysql.js');
 const validate = require('./validate.js');
 const authController = require('./authController.js');
 const json = require('json');
@@ -14,8 +14,7 @@ const json = require('json');
 // Get Request: Home
 exports.getHome = (req, res, next) => {
     try {
-        // res.render('../../../../.././frontend/views/index.ejs');
-        res.render('C:\\Users\\DevLab\\Desktop\\.Projects\\Tastebuds\\frontend\\views\\index.ejs')
+        res.render('index.ejs');
     }
     catch (err) {console.log(err);}
     next();
@@ -98,7 +97,7 @@ exports.getItem = async (req, res, results, err, next) => {
 //     }
 // }
 
-// Patch Request
+// Patch Request: Menu Item
 exports.updateItem = async (req, res, id, err, results, fields, next) => {
     try {
         // const overwrittenItem = await item.put(req.body); *MongoDB
@@ -127,7 +126,7 @@ exports.updateItem = async (req, res, id, err, results, fields, next) => {
     }
 }   
 
-// Post Request
+// Post Request: Menu Item
 exports.createItem = async (req, res, err, next) => {
     // const newItem = await item.create(req.body);*MongoDB
 
@@ -141,7 +140,7 @@ exports.createItem = async (req, res, err, next) => {
       ) {
           res.send('Fields empty. Please enter data to continue.');
       }
-      // Create Workout Object *UPDATE PROPERTIES
+      // Create Menu Item Object *UPDATE PROPERTIES
       const newItem = {
           title: req.body.title,
           duration: req.body.duration,
@@ -154,11 +153,11 @@ exports.createItem = async (req, res, err, next) => {
         let query = `INSERT INTO TABLE ${/*db.table*/db} (${/*db.columns*/db}) VALUES(?,?,?,?);`;
         var createdItem = await db.query(query, [newItem.title, newItem.duration, newItem.description], (err, results, fields) => {
             if(err) {
-                res.status(400).json({error: 'There was an error submitting your request.'});
+                return res.status(400).json({error: 'There was an error submitting your request.'});
                 console.log(err);
             }
             else {
-                res.status(200).json({
+                return res.status(200).json({
                   status: "OK",
                   "message":"Data submission successful.",
                   data: createdItem
@@ -177,7 +176,7 @@ exports.createItem = async (req, res, err, next) => {
     next();
 }
 
-// Delete Request
+// Delete Request: Menu Item
 exports.deleteItem = async (req, res, id, err, next) => {
     try {
         // const deletedItem = await item.findByIdAndDelete(req.params.id); *MongoDB
@@ -213,7 +212,7 @@ exports.deleteItem = async (req, res, id, err, next) => {
         // Get, Validate & Sanitize  Data
         let {userName, password} = req.body;
         if(!userName && password) {
-            res.status(400).json({
+            return res.status(400).json({
                 status: "Failed",
                 message: "Fields cannot be empty. Please fill out fields and try again."
             });
@@ -243,7 +242,7 @@ exports.deleteItem = async (req, res, id, err, next) => {
     }
     
     // Signup
-    exports.signUp = async (req, res, err, id, token, next) => {
+    exports.signUp = async (req, res, err, id, token, hassedPassword, next) => {
         // Get & Validate Data
         var userName = req.body.userName;
         var email = req.body.email;
@@ -267,13 +266,14 @@ exports.deleteItem = async (req, res, id, err, next) => {
                 // TODO: Get user ID from DB
                 {user_id: user_id, userName}, 
                 process.env.TOKEN_KEY,
-                {expiresIn: "5h"}
+                {expiresIn: "1h"}
             )
+            return res.status(200).json({"status": "OK", "data": token})
 
             // Salt Password
-
+            const hassedPassword = bcrypt.hash(password, 5);
             // Store in DB
-            var query = `INSERT INTO ${/*table name*/db} VALUES(${userName}, ${email}, ${password})`;
+            var query = `INSERT INTO ${/*table name*/db} VALUES(${userName}, ${email}, ${hassedPassword})`;
             db.query(query)
             // Verify Submission & Send Confirmation & Redirect
             res.status(200).json({}).then(res.redirect('/login'))
