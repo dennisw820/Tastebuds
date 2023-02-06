@@ -1,6 +1,7 @@
 // Resources
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const session = require('express-session');
 // const itemSchema = require('.././models/model.js');
 // const db = require('../../../../.config/mysql.js');
 const router = require("../routes/router.js");
@@ -224,11 +225,19 @@ exports.deleteItem = async (req, res, id, err, next) => {
         try {
             await db.query(query)
             if(results.length > 0) {
-                res.status(200).json({
-                    "status": "OK",
-                    "message": "Login successful."
+                // Compare User Input to Password
+                const match = await bcrypt.compare(password, results.password, (match) => {
+                    if (match) {
+                        // Create User Session
+                        req.session.authenticated = true;
+                        req.session.user = {username, password};
+                        res.status(200).json({
+                            "status": "OK",
+                            "message": "Login successful."
+                        })
+                        res.render('/welcome');
+                    }
                 })
-                res.render('../../../../../frontend/views/welcome.ejs')
             }
         }
         catch(err) {
@@ -237,6 +246,8 @@ exports.deleteItem = async (req, res, id, err, next) => {
                 "message": err
             })
         }
+
+
 
         db.destroy();
         next();

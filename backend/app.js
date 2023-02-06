@@ -1,5 +1,6 @@
 // Dependencies 
 const express = require('express');
+const session = require('express-session');
 const router = require('./api/src/v1/routes/router.js');
 // const mongodb = require('./.config/mongodb');
 const passport = require('./.config/passport.js');
@@ -16,16 +17,19 @@ require('dotenv').config();
 
 app.set('view engine', 'ejs');
 app.set('views', `${__dirname}/../frontend/views`);
-// app.use(session({
-    //     secret: process.env.SECRET,
-    //     resave: true,
-    //     saveUninitialized: true
-    // }));
-    
+const store = new session.MemoryStore();
+
     // Middleware
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(bodyParser.json());
     app.use(cors());
+    app.use(session({
+        secret: process.env.SECRET,
+        cookie: {maxAge:300000, secure: true, sameSite: "none"},
+        resave: false,
+        saveUninitialized: false,
+        store
+    }))
     // require static for static routes
     app.use(express.static(__dirname));
     app.use(express.static('private'));
