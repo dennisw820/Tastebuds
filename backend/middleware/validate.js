@@ -1,5 +1,5 @@
 // Resources
-const db = require('../../../../.config/mysql.js');
+const db = require('../.config/mysql.js');
 const bcrypt = require('bcryptjs');
 
 // Error Handler

@@ -2,17 +2,17 @@
 const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/controller.js');
-const authController = require('../controllers/authController.js');
+const authController = require('../../../../middleware/authenticate.js');
 
 // Landing Route
 router.route('/')
-    .get(authController.protect, controller.getHome)
+    .get(authController.authenticate, controller.getHome)
     .post();
 
 // Signin Route
 router.route('/signin')
     .get(controller.getHome)
-    .post(controller.signIn);
+    .post(controller.handleLogIn);
 
 // Home Route
 router.route('/welcome')
@@ -25,7 +25,7 @@ router.route('/signup')
     .get((req,res) => {
         res.render('signup.ejs');
     })
-    .post(controller.signUp);
+    .post(controller.handleSignUp);
 
 // Password Reset
 router.route('/password-reset')
@@ -117,7 +117,7 @@ router.route('/contact')
     .get((req, res) => {
         res.render('contact.ejs');
     })
-    .post();
+    .post(handleContactReq);
 
 //  Export Router 
 module.exports = router;

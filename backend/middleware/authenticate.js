@@ -1,25 +1,32 @@
 // Resources
 // const db = require(__dirname + '/backend/.config/mysql.js');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
 const { promisify } = require('util');
 const { authController } = require('passport');
 
 // Middleware
 // db.connect();
 // const decoded;
-exports.protect = (async (req, res, next, token, decoded, promisify) => {
-    // 1. Check Esistence & Get Token
-    // console.log(req.headers)
-    // let token;
+exports.authenticate = (async (req, res, next, token, decoded, promisify) => {
+    // 1. Check for Token Existence & Get Token
     try {
+        if (!token) {
+            return res.status(403).json({err: 'You are not logged in! Please log in to get access.'})
+        }
         if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
             const token = req.headers.authorization.split(' ')[1];
         }
-        console.log(token)
-        if (!token) {
-            return next('You are not logged in! Please log in to get access.', 401)
-        }
+        // console.log(token)
+
+        // 2. Token Verification
+        await promisify(jwt.verify)(token, process.env.TOKEN_KEY, (err, decoded)=>{
+            if(err) return res.sendStatus(403);
+            req.user = decoded.username;
+            console.log(decoded);
+        })
+
+        // 3. Next
+        next();
     }
     catch(err) {
         res.status(400).json({
@@ -27,13 +34,7 @@ exports.protect = (async (req, res, next, token, decoded, promisify) => {
             "message":"Error processing request."
         })
     }
-    // 2. Token Verification
-    decoded = await promisify(jwt.verify)(token, process.env.TOKEN_KEY)
-    console.log(decoded);
-    // 3. Check if User Still Exist
 
-    // 4. Check if User Changed Password After JWT Issued
-    next();
 });
 
 // module.exports = authController;
