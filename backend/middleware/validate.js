@@ -41,7 +41,7 @@ exports.isEmail = (req, res, next) => {
     next();
 }
 // Checks if Username Exists (Returns Boolean)
-exports.usernameTaken = (req, res, err, row, next) => {
+exports.isUsernameTaken = (req, res, err, row, next) => {
     //verify that username is not already in use
     db.query("SELECT * FROM users WHERE username = ?", [req.body.username], (err, row) => {
         if (row) {

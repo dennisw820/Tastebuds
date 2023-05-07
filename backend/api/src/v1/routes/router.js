@@ -1,8 +1,9 @@
 // Resources
 const express = require('express');
 const router = express.Router();
-const controller = require('../controllers/controller.js');
+const controller = require('../controllers/accounts.js');
 const authController = require('../../../../middleware/authenticate.js');
+const locationController = require('../controllers/location.js');
 
 // Landing Route
 router.route('/')
@@ -12,13 +13,11 @@ router.route('/')
 // Signin Route
 router.route('/signin')
     .get(controller.getHome)
-    .post(controller.handleLogIn);
+    .post(controller.handleLoginReq)
 
-// Home Route
-router.route('/welcome')
-    .get(function(req, res) {
-        res.render('welcome.ejs');
-    });
+// // Home Route
+// router.route('/welcome')
+//     .get();
 
 // Signup Route ***
 router.route('/signup')
@@ -73,7 +72,7 @@ router.route('/cart')
     .get(function(req,res){
         res.render('cart.ejs');
     })
-    .post();
+    .post(controller.addToCart);
 
 // Location
 router.route('/location')
@@ -82,7 +81,7 @@ router.route('/location')
         // var location = require('./private/Javascript/location.js')
         res.render('findLocation.ejs');
     })
-    .post();
+    .post(locationController.handleLocationReq);
 
 // Help
 router.route('/help')
@@ -117,7 +116,7 @@ router.route('/contact')
     .get((req, res) => {
         res.render('contact.ejs');
     })
-    .post(handleContactReq);
+    .post(controller.handleContactReq);
 
 //  Export Router 
 module.exports = router;

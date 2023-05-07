@@ -5,7 +5,6 @@ const { promisify } = require('util');
 const { authController } = require('passport');
 
 // Middleware
-// db.connect();
 // const decoded;
 exports.authenticate = (async (req, res, next, token, decoded, promisify) => {
     // 1. Check for Token Existence & Get Token
@@ -27,8 +26,7 @@ exports.authenticate = (async (req, res, next, token, decoded, promisify) => {
 
         // 3. Next
         next();
-    }
-    catch(err) {
+    }catch(err) {
         res.status(400).json({
             "status": "Failed",
             "message":"Error processing request."
