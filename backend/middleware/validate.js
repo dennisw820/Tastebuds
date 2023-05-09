@@ -15,7 +15,7 @@ exports.errorHandler = (error, next) => {
 exports.isEmpty = (req, res, next) => {
     //verify that email, username, and password are not empty
     console.log(req.body);
-    if (req.body.email === "" || req.body.username === "" || req.body.password === "") {
+    if (req.body.email === "" || req.body.username === "" || req.body.password === "" || req.body.review) {
         return true;
         res.json({
         type: "error", 

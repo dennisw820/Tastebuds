@@ -116,7 +116,7 @@ router.route('/contact')
     .get((req, res) => {
         res.render('contact.ejs');
     })
-    .post(controller.handleContactReq);
+    .post(authController.authenticate, controller.handleContactReq);
 
 //  Export Router 
 module.exports = router;

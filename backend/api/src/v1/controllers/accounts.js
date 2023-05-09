@@ -163,6 +163,17 @@ exports.getHome = (req, res, next) => {
 
     // Contact
     exports.handleContactReq = async (req, res, err, id, next) => {
+        // Get User Data
+
+        // Validate Data
+
+        // Store Contact Data
+
+        // Send Email
+
+        // Send Confirmation
         msg = `We have received your request and will be contacting you soon.`;
+        return res.status(200).json({}) 
         res.render('confirmation.ejs', {msg});
+        res.redirect('/');
     }

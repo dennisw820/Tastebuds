@@ -1,5 +1,5 @@
 // Resources
-// const db = require(__dirname + '/backend/.config/mysql.js');
+const db = require('../.config/mysql.js');
 const jwt = require('jsonwebtoken');
 const { promisify } = require('util');
 const { authController } = require('passport');
@@ -8,7 +8,6 @@ const { authController } = require('passport');
 // const decoded;
 exports.authenticate = (async (req, res, next, token, decoded, promisify) => {
     // 1. Check for Token Existence & Get Token
-    try {
         if (!token) {
             return res.status(403).json({err: 'You are not logged in! Please log in to get access.'})
         }
@@ -18,20 +17,24 @@ exports.authenticate = (async (req, res, next, token, decoded, promisify) => {
         // console.log(token)
 
         // 2. Token Verification
-        await promisify(jwt.verify)(token, process.env.TOKEN_KEY, (err, decoded)=>{
-            if(err) return res.sendStatus(403);
-            req.user = decoded.username;
-            console.log(decoded);
-        })
-
-        // 3. Next
+        try{ await promisify(jwt.verify)(token, process.env.TOKEN_KEY, (err, decoded)=>{
+                req.user = decoded.username;
+                console.log(decoded);
+            })
+        }catch(err) {
+            res.status(400).json({
+                "status": "Failed",
+                "message":"Error processing request."
+            })
+        }
+        // Check if User Still Exist
+        try{
+            const query = `SELECT id FROM users WHERE id = ${decoded.id}`;
+            const freshUser = await db.query(query);
+        }catch(err){return res.status(400).json({"message": "There user belonging to this token no longer exist."})}
+        
+        // Last. Next
         next();
-    }catch(err) {
-        res.status(400).json({
-            "status": "Failed",
-            "message":"Error processing request."
-        })
-    }
 
 });
 

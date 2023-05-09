@@ -5,7 +5,6 @@ const router = require('./api/src/v1/routes/router.js');
 // const mongodb = require('./.config/mongodb');
 const db = require('./.config/mysql.js')
 const passport = require('./.config/passport.js');
-const mysql = require('mysql');
 const bcrypt = require('bcryptjs');
 var cookieSession = require('cookie-session');
 const cors = require('cors');
@@ -34,7 +33,7 @@ const store = new session.MemoryStore();
     // require static for static routes
     app.use(express.static(__dirname));
     app.use(express.static('private'));
-    app.use("/", router);
+    app.use("/api/src/v1", router);
     
     
 app.listen(process.env.PORT, () => {
