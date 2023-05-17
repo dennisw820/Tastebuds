@@ -1,10 +1,10 @@
  // Menu
-// Get Request: All
+// Get Request: All Currently Serving
 exports.getItems = async (req, res, err, results, next) => {
     try {
         // const items = await item.find(); *MongoDB
         // Write & Execute Query
-        var query = `SELECT * FROM ${/*db.table*/ db};`;
+        var query = `SELECT * FROM ${/*db.table*/ db} WHERE stillServing = true;`;
         var items = await db.query(query);
         res.status(200).json({
             status: 'success',
@@ -22,13 +22,13 @@ exports.getItems = async (req, res, err, results, next) => {
     db.destroy();
     next();
 }
-// Get Request
+// Get Request Currently Serving
 exports.getItem = async (req, res, results, err, next) => {
     try {
         // Get ID
         var id = req.params.id;
         // const item = await item.findById(req.param.id); *MongoDB
-        var query = `SELECT * FROM ${/*db.table*/ db} WHERE id = id;`;
+        var query = `SELECT * FROM ${/*db.table*/ db} WHERE id = id AND stillServing = true;`;
         var item = await db.query(query);
         res.status(200).json({
             status: 'success',

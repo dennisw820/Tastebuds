@@ -9,6 +9,7 @@ const db = mysql.createConnection({
 });
 try{
     db.connect()
+    console.log('DB connection successful.')
 }catch(err){
     res.sendStatus(400) 
     console.log(err)

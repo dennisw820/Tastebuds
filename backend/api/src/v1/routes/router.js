@@ -4,6 +4,7 @@ const router = express.Router();
 const controller = require('../controllers/accounts.js');
 const authController = require('../../../../middleware/authenticate.js');
 const locationController = require('../controllers/location.js');
+const contactController = require('./../controllers/contact.js');
 
 // Landing Route
 router.route('/')
@@ -116,7 +117,7 @@ router.route('/contact')
     .get((req, res) => {
         res.render('contact.ejs');
     })
-    .post(authController.authenticate, controller.handleContactReq);
+    .post(authController.authenticate, contactController.handleContactReq);
 
 //  Export Router 
 module.exports = router;

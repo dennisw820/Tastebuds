@@ -23,6 +23,7 @@ exports.getHome = (req, res, next) => {
 }
 
     // Login
+    // TODO: Implement MFA
     exports.handleLoginReq = async (req, res, err, id, next) => {
         // Get, Validate & Sanitize  Data
         let {userName, password} = req.body;
@@ -84,6 +85,7 @@ exports.getHome = (req, res, next) => {
     // }
 
     // Signup
+    // TODO: Implement Security Questions
     exports.handleSignUp = async (req, res, err, id, token, hassedPassword, next) => {
         // Get & Validate Data
         var userName = req.body.userName;
@@ -130,18 +132,40 @@ exports.getHome = (req, res, next) => {
 
     // Edit Profile
     exports.updateProfile = async (req, res, err, id, next) => {
-        // Get User Profile from DB
-        // Update User Data & Store Changes in DB
+        // Get, Validate & Sanitize Data
+
+        // Verify User Exist & Signed in w/ Token 
+        
+        // Perfrom Update Query in DB
+        
+        // Send Confirmation
     }
 
     // Password Reset
     exports.handlePwResetReq = async (req, res, err, id, next) => {
+        // Get User Based on Token
 
+        // If Token is Valid & User Exist, Set New Pw
+
+        // Update changedPasswordat Property for User
+
+        // Log User in & Send JWT
     }
 
     // Forgot Password
     exports.handleForgotPwReq = async (req, res, err, id, next) => {
 
+    }
+
+    // Delete Profile
+    exports.handleDeleteReq = async (req, res, id) => {
+        // Get User Data (Delete Requets Verification via Typing Username)
+
+        // Verify User Data Matches Username
+
+        // Perform Delete Query in DB
+
+        // Send Confirmation
     }
 
     // Checkout
