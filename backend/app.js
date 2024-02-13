@@ -1,6 +1,7 @@
 // Dependencies 
 const express = require('express');
 const session = require('express-session');
+const morgan = require('morgan');
 const router = require('./api/src/v1/routes/router.js');
 // const mongodb = require('./.config/mongodb');
 const db = require('./.config/mysql.js')
