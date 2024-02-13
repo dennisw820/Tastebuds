@@ -7,6 +7,7 @@ const db = require('./.config/mysql.js')
 const passport = require('./.config/passport.js');
 const bcrypt = require('bcryptjs');
 var cookieSession = require('cookie-session');
+const morgan = require('morgan');
 const helmet = require('helmet');
 const hpp = require('hpp');
 const cors = require('cors');
