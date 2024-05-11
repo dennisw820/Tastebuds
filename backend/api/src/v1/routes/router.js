@@ -5,6 +5,7 @@ const controller = require('../controllers/accounts.js');
 const authController = require('../../../../middleware/authenticate.js');
 const locationController = require('../controllers/location.js');
 const contactController = require('./../controllers/contact.js');
+const menuController = reqquire('../controllers/menu.js');
 
 // Landing Route
 router.route('/')

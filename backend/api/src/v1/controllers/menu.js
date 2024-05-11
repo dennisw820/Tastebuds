@@ -4,7 +4,7 @@ exports.getItems = async (req, res, err, results, next) => {
     try {
         // const items = await item.find(); *MongoDB
         // Write & Execute Query
-        var query = `SELECT * FROM ${/*db.table*/ db} WHERE stillServing = true;`;
+        var query = `SELECT * FROM menu WHERE stillServing = true;`;
         var items = await db.query(query);
         res.status(200).json({
             status: 'success',
