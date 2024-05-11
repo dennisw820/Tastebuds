@@ -5,7 +5,7 @@ const controller = require('../controllers/accounts.js');
 const authController = require('../../../../middleware/authenticate.js');
 const locationController = require('../controllers/location.js');
 const contactController = require('./../controllers/contact.js');
-const menuController = reqquire('../controllers/menu.js');
+const menuController = require('../controllers/menu.js');
 
 // Landing Route
 router.route('/')
@@ -58,7 +58,7 @@ router.route('/food-menu')
         //     return replaceTemplate(foodTemplate, el).join('');
         // });
         // console.log(dishes);
-        var dishes = '';
+        var dishes = menuController.getItems;
         res.render('foodmenu.ejs', {dishes:dishes});
     })
     .post();
