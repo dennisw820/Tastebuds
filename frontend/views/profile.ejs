@@ -1,12 +1,22 @@
 <%- include ('partials/navbar.ejs') %>
-    <div class="container-fluid p-3 m-4">
+<style>
+    #container {
+        height: 100vh;
+    }
+    .profile-header {
+        font-weight: 900;
+    }
+</style>
+<div id="container" class="bg-success d-flex">
+    <div class="d-flex container-fluid p-3 m-4 rounded-3 w-100 h-100">
         <div class="row">
             <div class="col">
                 <img src="https://images.pexels.com/photos/6801642/pexels-photo-6801642.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"  alt="Profile picture" class="row rounded-circle mb-3">
-                <a href="" class="link">Change Profile Picture</a>
+                <a href="" class="nav-link text-primary" upload>Change Profile Picture</a>
+                <input type="file">
             </div>
             <div class="col text-left">
-                <h1 class="mb-4">Profile Name</h1>
+                <h1 class="profile-header mb-4">Profile Name</h1>
                 <ul class="">
                     <li class="list-item profile-list">
                         <label class="">Bithday:</label>
@@ -32,36 +42,36 @@
             </div>
         </div>
         <div class="row mt-5 text-left">
-            <h1 class="mb-3">Account Details</h1>
+            <h1 class="profile-header mb-3">Account Details</h1>
             <form action="" method="POST" class="row">
                 <div class="row mb-2">
                     <label for="name">Full Name</label>
-                    <input name="name" type="text" class="form-control p-3">
+                    <input name="name" type="text" class="form-control p-3 rounded-5" placeholder="John Doe">
                 </div>
                 
                 <div class="row mb-2">
                     <label for="username">Username</label>
-                    <input name="username" type="text" class="form-control p-3">
+                    <input name="username" type="text" class="form-control p-3 rounded-5">
                 </div>
 
                 <div class="row mb-2">
                     <label for="email">Email</label>
-                    <input name="email" type="email" class="form-control p-3">
+                    <input name="email" type="email" class="form-control p-3 rounded-5">
                 </div>
 
                 <div class="row mb-2">
                     <label for="password">Password</label>
-                    <input name="password" type="password" class="form-control p-3">
+                    <input name="password" type="password" class="form-control p-3 rounded-5">
                 </div>
 
                 <div class="row mb-2">
                     <label for="confpassword">Password</label>
-                    <input name="confpassword" type="password" class="form-control p-3">
+                    <input name="confpassword" type="password" class="form-control p-3 rounded-5">
                 </div>
 
                 <div class="row mb-2">
                     <label for="language">Preferred Language</label>
-                    <select name="language" type="text" class="form-control p-3">
+                    <select name="language" type="text" class="form-control p-3 rounded-5">
                         <option value="English" class="" selected>English</option>
                         <option value="Spanish" class="">Spanish</option>
                         <option value="French" class="">French</option>
@@ -70,4 +80,5 @@
             </form>
         </div>
     </div>
+</div>    
 <%- include ('partials/footer.ejs') %>

@@ -40,7 +40,8 @@ const store = new session.MemoryStore();
     // require static for static routes
     app.use(express.static(__dirname));
     app.use(express.static('private'));
-    app.use("/api/src/v1", router);
+    // app.use("/api/src/v1", router);
+    app.use("/", router);
     app.use(morgan('dev'));
     
     // Limit Request Rate

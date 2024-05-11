@@ -9,6 +9,7 @@ const contactController = require('./../controllers/contact.js');
 // Landing Route
 router.route('/')
     .get(authController.authenticate, controller.getHome)
+    // .get(controller.getHome)
     .post();
 
 // Signin Route
@@ -120,4 +121,4 @@ router.route('/contact')
     .post(authController.authenticate, contactController.handleContactReq);
 
 //  Export Router 
-module.exports = router;
+module.exports = router, controller;

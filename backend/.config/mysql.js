@@ -9,16 +9,14 @@ const db = mysql.createConnection({
 });
 try{
     db.connect()
-    db.query(`CREATE TABLE contact(
-        contact_id INT(100) AUTO_INCREMENT PRIMARY KEY,
-        first_name CHAR(50) NOT NULL,
-        last_name CHAR(50) NOT NULL,
-        phone INT(15) NOT NULL,
-        email VARCHAR(75) NOT NULL,
-        subject VARCHAR(75) NOT NULL,
-        message VARCHAR(255) NOT NULL,
-        created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-        last_modified DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP);`)
+    db.query(`INSERT INTO transactions (amount) VALUES ("100.00")`,(err, results, fields)=>{
+        if(err) throw err;
+        console.log(results[0]);
+    });
+    db.query(`SELECT * FROM transactions`, (err, results) => {
+        if (err) throw err;
+        console.log(results[0])
+    })
     console.log('DB connection successful.')
 }catch(err){
     res.sendStatus(400) 

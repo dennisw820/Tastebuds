@@ -28,7 +28,7 @@ exports.getItem = async (req, res, results, err, next) => {
         // Get ID
         var id = req.params.id;
         // const item = await item.findById(req.param.id); *MongoDB
-        var query = `SELECT * FROM ${/*db.table*/ db} WHERE id = id AND stillServing = true;`;
+        var query = `SELECT * FROM menu WHERE id = id AND is_available = true;`;
         var item = await db.query(query);
         res.status(200).json({
             status: 'success',
@@ -82,7 +82,7 @@ exports.updateItem = async (req, res, id, err, results, fields, next) => {
         // const overwrittenItem = await item.put(req.body); *MongoDB
 
         var id = req.params.id;
-        let query = `UPDATE ${/*db.table*/db} SET ? = ?;`;
+        let query = `UPDATE menu SET ? = ?;`;
 
 
         // Write Query & Execute
@@ -129,8 +129,8 @@ exports.createItem = async (req, res, err, next) => {
     try {
         // Write Query & Execute
             // ***Avoid including sensitive info in query
-        let query = `INSERT INTO TABLE ${/*db.table*/db} (${/*db.columns*/db}) VALUES(?,?,?,?);`;
-        var createdItem = await db.query(query, [newItem.title, newItem.duration, newItem.description], (err, results, fields) => {
+        let query = `INSERT INTO TABLE menu (title, description, price, quantity, is_available, rating, category, cuisine, allergens, ingredients, preparation_time, is_vegan, is_vegetarian, is_gluten_free) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?);`;
+        var createdItem = await db.query(query, [newItem.title, newItem.duration, newItem.description, newItem.price, newItem.quantity, newItem.is_available, newItem.rating, newItem.category, newItem.cuisine, newItem.allergens, newItem.ingredients, newItem.preparation_time, newItem.is_vegan, newItem.is_vegetarian, newItem.is_gluten_free], (err, results, fields) => {
             if(err) {
                 return res.status(400).json({error: 'There was an error submitting your request.'});
                 console.log(err);
@@ -165,7 +165,7 @@ exports.deleteItem = async (req, res, id, err, next) => {
 
         // Write Query & Execute
         // ***Avoid including sensitive info in query
-        let query = `DELETE FROM ${/*db.table*/db} WHERE ${/*table.id*/db} = ?;`;
+        let query = `DELETE FROM menu WHERE ${/*table.id*/db} = ?;`;
             var deletedRecord = await db.query(query,[`${id}`], (err, results, fields) =>{
                 if(err) {
                     res.status(400).json({error: 'There was an error fetching your request. Please try again.'});
